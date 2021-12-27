@@ -24,6 +24,7 @@ app.get('/:token', (req, res) => {
     User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
         .then((user) => {
             console.log(user)
+            console.log(req.params.token)
         }).catch((err) => {
             console.log(err)
             res.status(401)
