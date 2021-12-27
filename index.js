@@ -8,8 +8,10 @@ const app = express()
 
 app.use(express.json()); //Used to parse JSON bodies
 
+const url = `mongodb+srv://eleosadmin:${process.env.MONGO_PASS}@cluster0.uylzw.mongodb.net/Eleos?retryWrites=true&w=majority`
+
 const database = mongoose
-    .connect(process.env.MONGO_URI)
+    .connect(url)
     .then(console.log("Database Connected..."))
     .catch(err => console.log(err))
 
