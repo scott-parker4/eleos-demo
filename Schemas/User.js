@@ -32,15 +32,6 @@ const UserSchema = new Schema(
         },
     });
 
-    module.exports = USER = mongoose.model('USER', UserSchema)
+    module.exports = USER = mongoose.model('user', UserSchema)
 
- /*    {
-        "username": "SCOTT-DEM0",
-        "full_name": "Scott Parker",
-        "menu_code": "DEFAULT-MENU",
-        "dashboard_code": "DEFAULT-DASHBOARD",
-        "custom_settings_form_code": "SETTINGS",
-        "api_token": "xMlSxxXKR7hQl1lsXLEuS8tLqvUDT2zh7qBoudc04Iv"
-
-    } */
 
