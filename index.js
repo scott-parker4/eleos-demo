@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 app.get('/authenticate/:token', (req, res) => {
     const jwtDecode = jwt_decode(req.params.token)
-    User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
+    User.findOne({ username: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
         .then((user) => {
             user.api_token = jwt_encode({ "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, 'secret')
             res.json(user)
