@@ -11,7 +11,7 @@ app.use(express.json()); // Used to parse JSON bodies
 
 const url = `mongodb+srv://eleosadmin:${process.env.MONGO_PASS}@cluster0.uylzw.mongodb.net/Eleos?retryWrites=true&w=majority`
 
-const database = mongoose
+const database = mongoose // Connect to Mongo DB
     .connect(url)
     .then(console.log("Database Connected..."))
     .catch(err => console.log(err))
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
 })
 
+// This endpoit allows the Eleos Platform to verify a user API token
 app.get('/authenticate/:token', (req, res) => {
     const jwtDecode = jwt_decode(req.params.token)
     User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
