@@ -49,12 +49,12 @@ app.listen(PORT, () => {
 })
 
 // Authenticate a token
-const tokenAuth = (token) => {
+const tokenAuth = (req) => {
     const jwtDecode = jwt_decode(req.params.token)
-    return new Promise((res, rej) => {
+    return new Promise((resolve, reject) => {
         User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
-        .then(res("Authorized"))
-        .catch(rej("Unauthorized"))
+        .then(resolve("Authorized"))
+        .catch(reject("Unauthorized"))
     })
 }
 
