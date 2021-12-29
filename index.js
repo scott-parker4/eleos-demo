@@ -39,8 +39,10 @@ app.get('/authenticate/:token', (req, res) => {
 // This endpoint will enumerate loads for the Eleos Mobile Platform
 app.get('/loads', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1]
+    
     tokenAuth(headerToken)
-    .then(res.json(Load.find({})))  
+    .then(Load.find({})
+    .then(load => res.json(load)))  
 })
 
 const PORT = process.env.PORT || 3001
