@@ -15,8 +15,10 @@ const database = mongoose // Connect to Mongo DB
     .then(console.log("Database Connected..."))
     .catch(err => console.log(err))
 
+// Load Database Schemas
 const User = require('./Schemas/User')
 const Load = require('./Schemas/Loads')
+const Message = require('./Schemas/Messages')
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
@@ -39,19 +41,35 @@ app.get('/authenticate/:token', (req, res) => {
 
 // This endpoint will enumerate loads for the Eleos Mobile Platform
 app.get('/loads', (req, res) => {
-    const headerToken = req.header('Authorization').split('=')[1]
+
+    const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
     
     tokenAuth(headerToken)
-    .then(
-        Load.find({})
-    .then((load) => {
-        res.json(load)
-        console.log(load)
+        .then(
+            Load.find({})
+        .then((load) => {
+            res.json(load)
+            console.log(load)
+        })
+        ).catch((err) => {
+            console.log(err)
+            res.status(401)
     })
-    ).catch((err) => {
-        console.log(err)
-        res.status(401)
+})
+
+// This service allows the Eleos Mobile Platform to transmit messages from drivers to backend
+app.put('/messages/:handle', (req, res) => {
+    const message = new Message ({
+        
+        direction: req.body.direction,
+        username: req.body.username,
+        composed_at: req.body.composed_at,
+        read_at: req.body.read_at,
+        message_type: req.body.message_type,
+        body: req.body.body
     })
+    message.save()
+    .then(res.json(req.params.handle))
 })
 
 const PORT = process.env.PORT || 3001
@@ -59,7 +77,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
 
-// Authenticate a token
+// Function that authenticates a token
 const tokenAuth = (token) => {
     const jwtDecode = jwt_decode(token)
     return new Promise((resolve, reject) => {
