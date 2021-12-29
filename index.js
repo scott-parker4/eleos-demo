@@ -38,7 +38,8 @@ app.get('/authenticate/:token', (req, res) => {
 
 // This endpoint will enumerate loads for the Eleos Mobile Platform
 app.get('/loads', (req, res) => {
-    tokenAuth(req.header.token)
+    const headerToken = req.header('Authorization').split('=')[1]
+    tokenAuth(headerToken)
     .then(Load.find)
     .then(res.json(Load))
 })
