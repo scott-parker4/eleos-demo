@@ -40,8 +40,7 @@ app.get('/authenticate/:token', (req, res) => {
 app.get('/loads', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1]
     tokenAuth(headerToken)
-    .then(Load.find({}))
-    .then(loads => res.json(loads))
+    .then(res.json(Load.find({})))  
 })
 
 const PORT = process.env.PORT || 3001
