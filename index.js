@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 // This endpoint allows the Eleos Platform to verify a user API token
 app.get('/authenticate/:token', (req, res) => {
     const jwtDecode = jwt_decode(req.params.token)
+
     User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
         .then((user) => {
             user.api_token = jwt_encode({ "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, `${process.env.TOKEN_SECRET}`)
@@ -41,11 +42,13 @@ app.get('/loads', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1]
     
     tokenAuth(headerToken)
-    .then(Load.find({}))
-    .then(load => {
+    .then(
+        Load.find({})
+    .then((load) => {
         res.json(load)
         console.log(load)
-    }).catch((err) => {
+    })
+    ).catch((err) => {
         console.log(err)
         res.status(401)
     })
