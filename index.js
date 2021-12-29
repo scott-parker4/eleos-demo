@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
 const jwt_decode = require('jwt-decode')
 const jwt_encode = require('jwt-encode')
 
@@ -17,6 +16,7 @@ const database = mongoose // Connect to Mongo DB
     .catch(err => console.log(err))
 
 const User = require('./Schemas/User')
+const Load = require('./Schemas/Loads')
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
@@ -36,10 +36,27 @@ app.get('/authenticate/:token', (req, res) => {
         });
 })
 
+// This endpoint will enumerate loads for the Eleos Mobile Platform
+app.get('/loads', (req, res) => {
+    tokenAuth(req.header.token)
+    .then(Load.find)
+    .then(res.json(Load))
+})
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
+
+// Authenticate a token
+const tokenAuth = (token) => {
+    const jwtDecode = jwt_decode(req.params.token)
+    return new Promise((res, rej) => {
+        User.findOne({ full_name: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] })
+        .then(res("Authorized"))
+        .catch(rej("Unauthorized"))
+    })
+}
 
 
 
