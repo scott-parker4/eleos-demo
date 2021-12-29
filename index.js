@@ -68,9 +68,12 @@ const message = new Message({
 })
 
 app.put('/messages/:handle', (req, res) => {
-   
     message.save()
-    .then(res.json(req.params.handle))
+        .then(res.json(req.params.handle)
+        ).catch((err) => {
+        console.log(err)
+        res.status(401)
+    })
 })
 
 const PORT = process.env.PORT || 3001
