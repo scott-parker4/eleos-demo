@@ -33,7 +33,7 @@ app.get('/authenticate/:token', (req, res) => {
         }).catch((err) => {
             console.log(err)
             res.status(401)
-        });
+        })
 })
 
 // This endpoint will enumerate loads for the Eleos Mobile Platform
@@ -45,6 +45,9 @@ app.get('/loads', (req, res) => {
     .then(load => {
         res.json(load)
         console.log(load)
+    }).catch((err) => {
+        console.log(err)
+        res.status(401)
     })
 })
 
