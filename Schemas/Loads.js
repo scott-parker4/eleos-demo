@@ -57,6 +57,17 @@ const LoadSchema = new Schema(
                     type: String,
                     required: true
                 },
+                location: {
+                    latitude: {
+                        type: Number,
+                        required: true
+                    },
+                    longitude: {
+                        type: Number,
+                        required: true
+                    },
+                    _id: false
+                },
                 _id: false,
                 identifiers: [
                     {
