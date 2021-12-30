@@ -59,7 +59,7 @@ app.get('/loads', (req, res) => {
 
 // This service allows the Eleos Mobile Platform to transmit messages from drivers to backend
 app.put('/messages/:handle', (req, res) => {
-    if(req.headers['Eleos-Platform-Key'] !== process.env.ELEOS_KEY) {
+    if(req.header('Eleos-Platform-Key') !== process.env.ELEOS_KEY) {
         res.status(401)
     } else {
         const message = new Message({
