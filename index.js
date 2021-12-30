@@ -97,20 +97,6 @@ app.get('/truck', (req, res) => {
     })
 })
 
-trucknew = new MyTruck({
-    "summary": "Check It Out",
-    "name": "Scott's Truck",
-    "location": {
-        "latitude": 34.68297382715801,
-        "longitude": -82.78587102825232
-    } 
-})
-  
-  trucknew.save().then(result => {
-    console.log('truck saved!')
-    mongoose.connection.close()
-  })
-
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
