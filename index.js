@@ -35,7 +35,7 @@ app.get('/authenticate/:token', (req, res) => {
             console.log(user)
         }).catch((err) => {
             console.log(err)
-            res.status(401)
+            res.status(401).send('Not Authorized')
         })
 })
 
@@ -59,8 +59,8 @@ app.get('/loads', (req, res) => {
 
 // This service allows the Eleos Mobile Platform to transmit messages from drivers to backend
 app.put('/messages/:handle', (req, res) => {
-    if(req.header('Eleos-Platform-Key') !== process.env.ELEOS_KEY) {
-        res.status(401)
+    if(req.header('Eleos-Platform-Key') !== process.env.ELEOS_KEY) { // Validate Header Platform key
+        res.status(401).send('Not Authorized')
     } else {
         const message = new Message({
             direction: req.body.direction,
