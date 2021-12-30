@@ -35,6 +35,10 @@ const LoadSchema = new Schema(
             type: Boolean,
             required: true
         },
+        trip_planner_enabled: {
+            type: Boolean,
+            required: false
+        },
         stops: [
             {
                 stop_number: {
