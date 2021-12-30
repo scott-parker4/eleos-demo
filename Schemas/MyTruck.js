@@ -13,11 +13,11 @@ const TruckSchema = new Schema(
         },
         location: {
             latitude: {
-                type: Number,
+                type: mongoose.Decimal128,
                 required: true
             },
             longitude: {
-                type: Number,
+                type: mongoose.Decimal128,
                 required: true
             }
         },
@@ -26,8 +26,10 @@ const TruckSchema = new Schema(
         toJSON: {
             transform(doc, ret) {
             delete ret._id;
-            }
+            },
+            versionKey: false,
         },
-    });
+    })
 
 module.exports = MYTRUCK = mongoose.model('mytruck', TruckSchema)
+
