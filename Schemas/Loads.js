@@ -76,7 +76,7 @@ const LoadSchema = new Schema(
             {
                 _id: false
             }
-        ]
+        ],
     },
         {
             toJSON: {
