@@ -34,7 +34,31 @@ const LoadSchema = new Schema(
         current: {
             type: Boolean,
             required: true
-        }
+        },
+        stops: [
+            {
+                stop_number: {
+                    type: Number,
+                    required: true
+                },
+                stop_type: {
+                    type: String,
+                    required: true
+                },
+                name: {
+                    type: String,
+                    required: true
+                },
+                city: {
+                    type: String,
+                    required: true
+                },
+                state: {
+                    type: String,
+                    required: true
+                }
+            }
+        ]
     },
         {
             toJSON: {
