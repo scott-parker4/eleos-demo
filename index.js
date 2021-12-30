@@ -20,6 +20,7 @@ const User = require('./Schemas/User')
 const Load = require('./Schemas/Loads')
 const Message = require('./Schemas/Messages')
 const MyTruck = require('./Schemas/MyTruck')
+const ToDo = require('./Schemas/Todo')
 
 // Hello World!
 app.get('/', (req, res) => {
@@ -88,6 +89,22 @@ app.get('/truck', (req, res) => {
     tokenAuth(headerToken)
         .then(
             MyTruck.find({})
+            .then((todo) => {
+            res.json(todo)
+            console.log(todo)
+        })
+        ).catch((err) => {
+            console.log(err)
+            res.status(401)
+    })
+})
+
+app.get('/todo', (req, res) => {
+    const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
+    
+    tokenAuth(headerToken)
+        .then(
+            ToDo.find({})
             .then((truck) => {
             res.json(truck[0])
             console.log(truck)
@@ -97,6 +114,22 @@ app.get('/truck', (req, res) => {
             res.status(401)
     })
 })
+
+todonew = new ToDo({
+    "handle": "TEST_TODO",
+    "name": "Take A Photo",
+    "type": "scan_flow",
+    "due_date": "2021-12-30T20:33:30+00:00",
+    "description": "Do This Todo!",
+    "properties": {
+        "scan_type": "photograph"
+    } 
+})
+  
+  todonew.save().then(result => {
+    console.log('todo saved!')
+    mongoose.connection.close()
+  })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
