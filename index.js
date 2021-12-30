@@ -111,7 +111,13 @@ loadnew = new Load({
       "stop_type": "Stop",
       "name": "Mr. Stop",
       "city": "Clemson",
-      "state": "SC"
+      "state": "SC",
+      "identifiers": [
+        {
+          "label": "Hi",
+          "value": "Howdy"
+        }
+      ]
     }]
   })
     

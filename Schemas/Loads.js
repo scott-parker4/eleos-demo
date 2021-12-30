@@ -57,6 +57,7 @@ const LoadSchema = new Schema(
                     type: String,
                     required: true
                 },
+                _id: false,
                 identifiers: [
                     {
                     label: {
@@ -72,11 +73,9 @@ const LoadSchema = new Schema(
                     _id: false
                 }
                 ]
-            },
-            {
-                _id: false
             }
         ],
+        
     },
         {
             toJSON: {
