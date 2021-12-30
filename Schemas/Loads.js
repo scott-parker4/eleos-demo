@@ -56,7 +56,25 @@ const LoadSchema = new Schema(
                 state: {
                     type: String,
                     required: true
+                },
+                identifiers: [
+                    {
+                    label: {
+                        type: String,
+                        required: true
+                    },
+                    value: {
+                        type: String,
+                        required: true
+                    }
+                },
+                {
+                    _id: false
                 }
+                ]
+            },
+            {
+                _id: false
             }
         ]
     },
