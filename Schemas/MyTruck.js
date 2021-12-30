@@ -1,6 +1,20 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const LocationModelSchema = new Schema(
+    {
+        latitude: {
+            type: mongoose.Decimal128,
+            required: true
+        },
+        longitude: {
+            type: mongoose.Decimal128,
+            required: true
+        }
+    }
+)
+mongoose.model('location',LocationModelSchema ,'location' )
+
 const TruckSchema = new Schema(
     {
         summary: {
@@ -12,14 +26,8 @@ const TruckSchema = new Schema(
             required: false
         },
         location: {
-            latitude: {
-                type: mongoose.Decimal128,
-                required: true
-            },
-            longitude: {
-                type: mongoose.Decimal128,
-                required: true
-            }
+            type: mongoose.Schema.Type.ObjectId,
+            ref: 'location'
         },
     },
     {

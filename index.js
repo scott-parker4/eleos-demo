@@ -87,7 +87,7 @@ app.get('/truck', (req, res) => {
     tokenAuth(headerToken)
         .then(
             MyTruck.find({})
-        .then((truck) => {
+            .then((truck) => {
             res.json(truck)
             console.log(truck)
         })
