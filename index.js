@@ -89,9 +89,9 @@ app.get('/truck', (req, res) => {
     tokenAuth(headerToken)
         .then(
             MyTruck.find({})
-            .then((todo) => {
-            res.json(todo)
-            console.log(todo)
+            .then((truck) => {
+            res.json(truck[0])
+            console.log(truck)
         })
         ).catch((err) => {
             console.log(err)
@@ -105,31 +105,15 @@ app.get('/todo', (req, res) => {
     tokenAuth(headerToken)
         .then(
             ToDo.find({})
-            .then((truck) => {
-            res.json(truck[0])
-            console.log(truck)
+            .then((todo) => {
+            res.json(todo)
+            console.log(todo)
         })
         ).catch((err) => {
             console.log(err)
             res.status(401)
     })
 })
-
-todonew = new ToDo({
-    "handle": "TEST_TODO",
-    "name": "Take A Photo",
-    "type": "scan_flow",
-    "due_date": "2021-12-30T20:33:30+00:00",
-    "description": "Do This Todo!",
-    "properties": {
-        "scan_type": "photograph"
-    } 
-})
-  
-  todonew.save().then(result => {
-    console.log('todo saved!')
-    mongoose.connection.close()
-  })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
