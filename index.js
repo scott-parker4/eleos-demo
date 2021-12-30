@@ -124,7 +124,7 @@ app.get('/payroll', (req, res) => {
         .then(
             Pay.find({})
             .then((pay) => {
-            res.json(pay)
+            pay.forEach( (pc) => res.json(pc))  
             console.log(pay)
         })
         ).catch((err) => {
