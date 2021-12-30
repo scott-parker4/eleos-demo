@@ -21,6 +21,7 @@ const Load = require('./Schemas/Loads')
 const Message = require('./Schemas/Messages')
 const MyTruck = require('./Schemas/MyTruck')
 
+// Hello World!
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
 })
