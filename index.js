@@ -97,35 +97,6 @@ app.get('/truck', (req, res) => {
     })
 })
 
-loadnew = new Load({
-    "id": "test load 2",
-    "display_identifier": "Test 2",
-    "sort": 2,
-    "order_number": "001",
-    "load_status": "Ready",
-    "load_status_label": "Status",
-    "active": true,
-    "current": true,
-    "stops": [{
-      "stop_number": 1,
-      "stop_type": "Stop",
-      "name": "Mr. Stop",
-      "city": "Clemson",
-      "state": "SC",
-      "identifiers": [
-        {
-          "label": "Hi",
-          "value": "Howdy"
-        }
-      ]
-    }]
-  })
-    
-    loadnew.save().then(result => {
-      console.log('load saved!')
-      mongoose.connection.close()
-    })
-
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
