@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 const LocationModelSchema = new Schema(
     {
         latitude: {
-            type: mongoose.Decimal128,
+            type: Number,
             required: true
         },
         longitude: {
-            type: mongoose.Decimal128,
+            type: Number,
             required: true
         }
     }
