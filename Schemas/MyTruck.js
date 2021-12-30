@@ -13,7 +13,6 @@ const LocationModelSchema = new Schema(
         }
     }
 )
-mongoose.model('location',LocationModelSchema ,'location' )
 
 const TruckSchema = new Schema(
     {
@@ -26,8 +25,8 @@ const TruckSchema = new Schema(
             required: false
         },
         location: {
-            type: mongoose.Schema.Type.ObjectId,
-            ref: 'location'
+            type: LocationModelSchema,
+            required: true
         },
     },
     {
