@@ -19,6 +19,7 @@ const database = mongoose // Connect to Mongo DB
 const User = require('./Schemas/User')
 const Load = require('./Schemas/Loads')
 const Message = require('./Schemas/Messages')
+const MyTruck = require('./Schemas/MyTruck')
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
@@ -78,6 +79,37 @@ app.put('/messages/:handle', (req, res) => {
     })
     }
 })
+
+// Return status related to truck repairs and location
+app.get('/truck', (req, res) => {
+    const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
+    
+    tokenAuth(headerToken)
+        .then(
+            MyTruck.find({})
+        .then((truck) => {
+            res.json(truck)
+            console.log(truck)
+        })
+        ).catch((err) => {
+            console.log(err)
+            res.status(401)
+    })
+})
+
+trucknew = new MyTruck({
+    "summary": "Check It Out",
+    "name": "Scott's Truck",
+    "location": {
+        "latitude": 34.68297382715801,
+        "longitude": -82.78587102825232
+    } 
+})
+  
+  trucknew.save().then(result => {
+    console.log('truck saved!')
+    mongoose.connection.close()
+  })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
