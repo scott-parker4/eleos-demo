@@ -21,6 +21,7 @@ const Load = require('./Schemas/Loads')
 const Message = require('./Schemas/Messages')
 const MyTruck = require('./Schemas/MyTruck')
 const ToDo = require('./Schemas/Todo')
+const Pay = require('./Schemas/Todo')
 
 // Hello World!
 app.get('/', (req, res) => {
@@ -115,6 +116,22 @@ app.get('/todo', (req, res) => {
             res.status(401)
     })
 })
+
+paynew = new Pay({
+    "check_date": "2021-12-30T20:33:30+00:00",
+    "amount": "100.00",
+    "details_title": "Details!",
+    "details": {
+        "label": "Moneyz",
+        "value": "100.00",
+        "value_type": "currency"
+    } 
+})
+  
+  paynew.save().then(result => {
+    console.log('paycheck saved!')
+    mongoose.connection.close()
+  }) 
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
