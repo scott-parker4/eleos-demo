@@ -67,9 +67,7 @@ const LoadSchema = new Schema(
                     value: {
                         type: String,
                         required: true
-                    }
-                },
-                {
+                    },
                     _id: false
                 }
                 ]
