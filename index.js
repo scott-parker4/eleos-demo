@@ -117,21 +117,21 @@ app.get('/todo', (req, res) => {
     })
 })
 
-paynew = new Pay({
-    "check_date": "2021-12-30T20:33:30+00:00",
-    "amount": "100.00",
-    "details_title": "Details!",
-    "details": {
-        "label": "Moneyz",
-        "value": "100.00",
-        "value_type": "currency"
-    } 
+app.get('/payroll', (req, res) => {
+    const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
+    
+    tokenAuth(headerToken)
+        .then(
+            Pay.find({})
+            .then((pay) => {
+            res.json(pay)
+            console.log(pay)
+        })
+        ).catch((err) => {
+            console.log(err)
+            res.status(401)
+    })
 })
-  
-  paynew.save().then(result => {
-    console.log('paycheck saved!')
-    mongoose.connection.close()
-  }) 
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
