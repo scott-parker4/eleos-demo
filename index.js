@@ -97,6 +97,40 @@ app.get('/truck', (req, res) => {
     })
 })
 
+loadnew = new Load({
+    "id": "test load 3",
+    "display_identifier": "Test 3",
+    "sort": 3,
+    "order_number": "003",
+    "load_status": "Ready",
+    "load_status_label": "Status",
+    "active": true,
+    "current": true,
+    "trip_planner_enabled": true,
+    "stops": [{
+      "stop_number": 1,
+      "stop_type": "Stop",
+      "name": "Mr. Stop",
+      "city": "Clemson",
+      "state": "SC",
+      "location": {
+        "latitude": 34.68297382715801,
+        "longitude": -82.78587102825232
+      },
+      "identifiers": [
+        {
+          "label": "Hi",
+          "value": "Howdy"
+        }
+      ]
+    }]
+  })
+    
+    loadnew.save().then(result => {
+      console.log('load saved!')
+      mongoose.connection.close()
+    })
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
