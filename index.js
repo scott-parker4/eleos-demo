@@ -21,7 +21,7 @@ const Load = require('./Schemas/Loads')
 const Message = require('./Schemas/Messages')
 const MyTruck = require('./Schemas/MyTruck')
 const ToDo = require('./Schemas/Todo')
-const Pay = require('./Schemas/Todo')
+const Pay = require('./Schemas/Paychecks')
 
 // Hello World!
 app.get('/', (req, res) => {
