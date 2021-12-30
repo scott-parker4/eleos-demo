@@ -13,3 +13,6 @@
 
 ### /truck
     - Returns driver status and location
+
+### /todo
+    - Returns a list of upcoming tasks to complete

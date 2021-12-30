@@ -99,6 +99,7 @@ app.get('/truck', (req, res) => {
     })
 })
 
+// Returns a list of upcoming tasks to complete
 app.get('/todo', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
     
