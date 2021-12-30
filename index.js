@@ -59,21 +59,24 @@ app.get('/loads', (req, res) => {
 
 // This service allows the Eleos Mobile Platform to transmit messages from drivers to backend
 app.put('/messages/:handle', (req, res) => {
-    const message = new Message({
-        direction: req.body.direction,
-        username: req.body.username,
-        composed_at: req.body.composed_at,
-        read_at: req.body.read_at,
-        message_type: req.body.message_type,
-        body: req.body.body
-    })
-    
-    message.save()
-        .then(res.json(req.params.handle)
-        ).catch((err) => {
-        console.log(err)
+    if(req.headers['Eleos-Platform-Key'] !== process.env.ELEOS_KEY) {
         res.status(401)
+    } else {
+        const message = new Message({
+            direction: req.body.direction,
+            username: req.body.username,
+            composed_at: req.body.composed_at,
+            read_at: req.body.read_at,
+            message_type: req.body.message_type,
+            body: req.body.body
+        })
+        message.save()
+            .then(res.json(req.params.handle)
+            ).catch((err) => {
+            console.log(err)
+            res.status(401)
     })
+    }
 })
 
 const PORT = process.env.PORT || 3001
