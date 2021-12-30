@@ -58,17 +58,19 @@ app.get('/loads', (req, res) => {
 })
 
 // This service allows the Eleos Mobile Platform to transmit messages from drivers to backend
-const message = new Message({
-    direction: req.body.direction,
-    username: req.body.username,
-    composed_at: req.body.composed_at,
-    read_at: req.body.read_at,
-    message_type: req.body.message_type,
-    body: req.body.body
+const message = (req) => {
+    new Message({
+        direction: req.body.direction,
+        username: req.body.username,
+        composed_at: req.body.composed_at,
+        read_at: req.body.read_at,
+        message_type: req.body.message_type,
+        body: req.body.body
 })
+}
 
 app.put('/messages/:handle', (req, res) => {
-    message.save()
+    message(req).save()
         .then(res.json(req.params.handle)
         ).catch((err) => {
         console.log(err)
