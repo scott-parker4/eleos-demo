@@ -122,7 +122,7 @@ app.get('/payroll', (req, res) => {
     
     tokenAuth(headerToken)
         .then(
-            Pay.find({})
+            Pay.findOne()
             .then((pay) => {
             res.json(pay)
             console.log(pay)
