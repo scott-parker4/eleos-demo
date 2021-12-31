@@ -91,7 +91,7 @@ app.get('/truck', (req, res) => {
         .then(
             MyTruck.findOne()
             .then((truck) => {
-            res.json(truck[0])
+            res.json(truck)
             console.log(truck)
         })
         ).catch((err) => {
