@@ -117,6 +117,7 @@ app.get('/todo', (req, res) => {
     })
 })
 
+// Retrieves a list of payroll information
 app.get('/payroll', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
     
@@ -131,32 +132,6 @@ app.get('/payroll', (req, res) => {
             console.log(err)
             res.status(401)
     })
-})
-
-paynew = new Pay(
-    {
-        "paychecks": [
-        {
-        "check_date": "2021-12-30T20:33:30+00:00",
-        "amount": "100.00",
-        "details_title": "Details!",
-        "details": {
-            "label": "Moneyz",
-            "value": "100.00",
-            "value_type": "currency"
-        } 
-    }
-        ]
-    })
-      
-      paynew.save().then(result => {
-        console.log('paycheck saved!')
-        mongoose.connection.close()
-      })
-
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
 })
 
 // Function that authenticates a token
