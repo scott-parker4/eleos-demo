@@ -134,6 +134,11 @@ app.get('/payroll', (req, res) => {
     })
 })
 
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
+
 // Function that authenticates a token
 const tokenAuth = (token) => {
     const jwtDecode = jwt_decode(token)
