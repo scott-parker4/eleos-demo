@@ -16,3 +16,6 @@
 
 ### /todo
     - Returns a list of upcoming tasks to complete
+
+### /payroll
+    - Returns a list of payroll information

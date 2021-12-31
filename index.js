@@ -89,7 +89,7 @@ app.get('/truck', (req, res) => {
     
     tokenAuth(headerToken)
         .then(
-            MyTruck.find({})
+            MyTruck.findOne()
             .then((truck) => {
             res.json(truck[0])
             console.log(truck)
