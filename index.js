@@ -117,7 +117,7 @@ app.get('/todo', (req, res) => {
     })
 })
 
-/* app.get('/payroll', (req, res) => {
+app.get('/payroll', (req, res) => {
     const headerToken = req.header('Authorization').split('=')[1] // Retrieve token from request header
     
     tokenAuth(headerToken)
@@ -131,7 +131,7 @@ app.get('/todo', (req, res) => {
             console.log(err)
             res.status(401)
     })
-}) */
+})
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
