@@ -133,6 +133,27 @@ app.get('/payroll', (req, res) => {
     })
 })
 
+paynew = new Pay(
+    {
+        "paychecks": [
+        {
+        "check_date": "2021-12-30T20:33:30+00:00",
+        "amount": "100.00",
+        "details_title": "Details!",
+        "details": {
+            "label": "Moneyz",
+            "value": "100.00",
+            "value_type": "currency"
+        } 
+    }
+        ]
+    })
+      
+      paynew.save().then(result => {
+        console.log('paycheck saved!')
+        mongoose.connection.close()
+      })
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

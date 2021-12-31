@@ -17,6 +17,7 @@ const PaySchema = new Schema(
                     type: String,
                     required: false
                 },
+                _id: false,
                 details: [
                     {
                         label: {
